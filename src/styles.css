@@ -55,3 +55,32 @@ header {
   border-radius: 5px;
   padding: 10px;
 }
+
+#content .project-add-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+#content .project-add-container .project-add-form {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+#content .project-add-container .project-add-form input {
+  min-width: 20%;
+  padding: 10px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+}
+
+#content .project-add-container .project-add-form button {
+  padding: 10px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -4,6 +4,7 @@ import createSideBar from "./View/Components/SideBar.js";
 import createMainContainer from "./View/Components/MainContainer.js";
 import createProjectIndex from "./View/Pages/Project/index.js";
 import createProjectAdd from "./View/Pages/Project/add.js";
+import createHomeIndex from "./View/Pages/Home/index.js";
 
 const contentDiv = document.getElementById("content");
 
@@ -29,7 +30,7 @@ function renderHome() {
   contentDiv.innerHTML = "";
   contentDiv.appendChild(createSideBar());
   const main = createMainContainer();
-  // Add home page content if needed
+  main.appendChild(createHomeIndex());
   contentDiv.appendChild(main);
   attachSidebarListeners();
 }
@@ -45,4 +46,4 @@ function attachSidebarListeners() {
 }
 
 // Initial render
-renderProjectIndex();
+renderHome();

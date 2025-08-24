@@ -1,25 +1,26 @@
+import createProjectForm from "../../Components/ProjectForm.js";
+import createTaskForm from "../../Components/TaskForm.js";
+
 function createProjectAdd() {
-  const form = document.createElement("form");
-  form.classList.add("project-add-form");
+  const projectAddDiv = document.createElement("div");
 
-  const titleInput = document.createElement("input");
-  titleInput.type = "text";
-  titleInput.placeholder = "Project Title";
-  titleInput.required = true;
+  const title = document.createElement("h2");
+  title.textContent = "Add Project";
 
-  const dateInput = document.createElement("input");
-  dateInput.type = "date";
-  dateInput.required = true;
+  projectAddDiv.appendChild(title);
+  projectAddDiv.classList.add("project-add-container");
 
-  const submitButton = document.createElement("button");
-  submitButton.type = "submit";
-  submitButton.textContent = "Add Project";
 
-  form.appendChild(titleInput);
-  form.appendChild(dateInput);
-  form.appendChild(submitButton);
+  const taskAddDiv = document.createElement("div");
+  const addTaskText = document.createElement("h3");
+  addTaskText.textContent = "Add Task";
+  taskAddDiv.classList.add("task-add-container");
+  taskAddDiv.appendChild(addTaskText);
+  taskAddDiv.appendChild(createTaskForm());
 
-  return form;
+  projectAddDiv.appendChild(createProjectForm());
+  projectAddDiv.appendChild(taskAddDiv);
+
+  return projectAddDiv;
 }
-
 export default createProjectAdd;
