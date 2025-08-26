@@ -1,14 +1,17 @@
 import Status  from "../Enum/Status.js";
 
 class Task {
-    constructor(title, description, dueDate, priority, notes, checkList, status = Status.INCOMPLETE) {
+    constructor(title, description, dueDate, priority, notes, status = Status.INCOMPLETE) {
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;
         this._priority = priority;
         this._notes = notes;
-        this._checkList = checkList;
         this._status = status;
+    }
+
+    get title() {
+        return this._title;
     }
 
     complete() {

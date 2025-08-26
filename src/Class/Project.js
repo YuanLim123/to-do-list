@@ -1,17 +1,27 @@
 class Project {
-    constructor() {
+    constructor(name, dueDate) {
         this._tasks = [];
+        this._name = name;
+        this._dueDate = dueDate;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    get dueDate() {
+        return this._dueDate;
     }
 
     add(task) {
         this._tasks.push(task);
     }
 
-    get(index) {
+    getTask(index) {
         return this._tasks[index];
     }
 
-    getAll() {
+    getAllTasks() {
         return this._tasks;
     }
 
@@ -24,7 +34,7 @@ class Project {
     }
 
     delete(index) {
-        this.tasks.splice(index, 1);
+        this._tasks.splice(index, 1);
     }
 
     first() {
