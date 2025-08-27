@@ -7,11 +7,6 @@ function createProjectForm() {
   titleInput.id = "title";
   form.appendChild(titleInput);
 
-  const dueDateInput = document.createElement("input");
-  dueDateInput.type = "date";
-  dueDateInput.id = "dueDate";
-  form.appendChild(dueDateInput);
-
   const submitButton = document.createElement("button");
   submitButton.textContent = "Add Project";
   form.appendChild(submitButton);

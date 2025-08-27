@@ -2,15 +2,10 @@ class Project {
     constructor(name, dueDate) {
         this._tasks = [];
         this._name = name;
-        this._dueDate = dueDate;
     }
 
     get name() {
         return this._name;
-    }
-
-    get dueDate() {
-        return this._dueDate;
     }
 
     add(task) {

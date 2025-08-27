@@ -14,6 +14,10 @@ class Task {
         return this._title;
     }
 
+    get dueDate() {
+        return this._dueDate;
+    }
+
     complete() {
         this._status = Status.COMPLETED;
     }

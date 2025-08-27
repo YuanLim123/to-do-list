@@ -9,10 +9,7 @@ function createProjectDetail(project = {}) {
   const projectTitle = document.createElement("p");
   projectTitle.textContent = `Name: ${(  project.name ?? '')}`;
   
-  const dueDate = document.createElement("p");
-  dueDate.textContent = `Due Date: ${(  project.dueDate ?? '')}`
   container.appendChild(projectTitle);
-  container.appendChild(dueDate);
 
   return container;
 }

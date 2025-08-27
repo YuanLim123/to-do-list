@@ -27,10 +27,15 @@ function createProjectAdd() {
   showTasListDiv.appendChild(showTaskListText);
   showTasListDiv.appendChild(createShowTaskList());
 
+  const saveButton = document.createElement("button");
+  saveButton.classList.add("save-project-button");
+  saveButton.textContent = "Save";
+
   projectAddDiv.appendChild(createProjectForm());
   projectAddDiv.appendChild(taskAddDiv);
   projectAddDiv.appendChild(showTasListDiv);
   projectAddDiv.appendChild(createProjectDetail());
+  projectAddDiv.appendChild(saveButton);
 
   return projectAddDiv;
 }
