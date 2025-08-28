@@ -1,7 +1,12 @@
 class Project {
     constructor(name, dueDate) {
+        this._id = crypto.randomUUID();
         this._tasks = [];
         this._name = name;
+    }
+
+    get id() {
+        return this._id;
     }
 
     get name() {
@@ -20,6 +25,10 @@ class Project {
         return this._tasks;
     }
 
+    findTaskById(id) {
+        return this._tasks.find(task => task.id === id);
+    }
+
     count() {
         return this._tasks.length;
     }
@@ -30,6 +39,10 @@ class Project {
 
     deleteTask(index) {
         this._tasks.splice(index, 1);
+    }
+
+    deleteTaskById(id) {
+        this._tasks = this._tasks.filter(task => task.id !== id);
     }
 
     first() {

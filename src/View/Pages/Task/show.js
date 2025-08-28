@@ -16,6 +16,7 @@ function createTaskShow(task) {
     editBtn.classList.add("edit-task-button");
 
     editBtn.textContent = "Edit";
+    editBtn.dataset.taskId = task.id;
 
     headerDiv.appendChild(title);
     headerDiv.appendChild(editBtn);

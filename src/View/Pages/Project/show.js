@@ -19,7 +19,7 @@ function createProjectShow(project = {}) {
     if (project.getAllTasks() && project.getAllTasks().length > 0) {
         const taskList = createShowTaskList();
         project.getAllTasks().forEach((task, idx) => {
-            const taskItem = createTaskListItem(task, idx);
+            const taskItem = createTaskListItem(task);
             taskList.appendChild(taskItem);
         });
         taskListDiv.appendChild(taskList);

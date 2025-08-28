@@ -1,4 +1,4 @@
-function createTaskListItem(task = {}, idx) {
+function createTaskListItem(task = {}) {
     const item = document.createElement("li");
     item.classList.add("task-list-item");
 
@@ -6,7 +6,7 @@ function createTaskListItem(task = {}, idx) {
     title.id = "task-title-link";
     title.href = "#";
     title.textContent = task.title;
-    title.dataset.index = idx;
+    title.dataset.taskId = task.id;
     
     const dueDate = document.createElement("span");
     dueDate.classList.add("task-due-date");
@@ -15,7 +15,7 @@ function createTaskListItem(task = {}, idx) {
     const deleteBtn = document.createElement("button");
     deleteBtn.id = "task-delete-button";
     deleteBtn.textContent = "Delete";
-    deleteBtn.dataset.index = idx;
+    deleteBtn.dataset.taskId = task.id;
 
     item.appendChild(title);
     item.appendChild(dueDate);

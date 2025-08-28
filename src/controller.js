@@ -7,6 +7,7 @@ import createProjectDetail from "./View/Components/ProjectDetail.js";
 import createProjectTable from "./View/Components/ProjectTable.js";
 import createShowProject from "./View/Pages/Project/show.js";
 import createTaskShow from "./View/Pages/Task/show.js";
+import createTaskEdit from "./View/Pages/Task/edit.js";
 import Task from "./Class/Task.js";
 import Project from "./Class/Project.js";
 import Priority from "./Enum/Priority.js";
@@ -126,19 +127,51 @@ class ScreenController {
 
   viewTask(e) {
     e.preventDefault();
-    const idx = e.target.dataset.index;
-    const task = this.currentProject.getAllTasks()[idx];
+    const id = e.target.dataset.taskId;
+    const task = this.currentProject.findTaskById(id);
+    if (!task) return;
     this.renderPage(createTaskShow(task));
   }
 
   deleteTask(e) {
     e.preventDefault();
     if (!confirm("Are you sure to delete this task?")) return;
-    const index = e.target.dataset.index;
-    if (index === undefined || index < 0 || index >= this.currentProject.length)
-      return;
-    this.currentProject.deleteTask(index);
+    const id = e.target.dataset.taskId;
+    const task = this.currentProject.findTaskById(id);
+    if (!task) return;
+
+    this.currentProject.deleteTaskById(id);
     this.renderPage(createShowProject(this.currentProject));
+  }
+
+  editTask(e) {
+    const id = e.target.dataset.taskId;
+    const task = this.currentProject.findTaskById(id);
+    if (!task) return;    
+    this.renderPage(createTaskEdit(task));
+  }
+
+  updateTask(e) {
+    e.preventDefault();
+    try {
+      const taskId = e.target.dataset.taskId;
+      const task = this.currentProject.findTaskById(taskId);
+
+      const title = document.getElementById("task-title").value;
+      const description = document.getElementById("task-description").value;
+      const dueDate = document.getElementById("task-dueDate").value;
+      const notes = document.getElementById("task-notes").value;
+      const priority = Priority.LOW;
+
+      task.update({ title, description, dueDate, notes, priority });
+      alert("Task updated successfully.");
+      this.renderPage(createTaskShow(task));
+    } catch (error) {
+      console.error("Error updating task:", error);
+      alert("Failed to update task. Please try again.");
+    } finally {
+      e.target.reset();
+    }
   }
 
   attachListeners() {
@@ -154,6 +187,8 @@ class ScreenController {
     const taskTittleLinks = document.querySelectorAll("#task-title-link");
     const backButton = document.querySelector(".back-button");
     const taskDeleteButtons = document.querySelectorAll("#task-delete-button");
+    const taskEditButton = document.querySelector(".edit-task-button");
+    const taskEditForm = document.getElementById("taskEditForm");
 
     if (homeButton)
       homeButton.onclick = () => this.renderPage(createHomeIndex());
@@ -168,6 +203,8 @@ class ScreenController {
     if (backButton)
       backButton.onclick = () =>
         this.renderPage(createProjectIndex(this.projects));
+    if (taskEditButton) taskEditButton.onclick = (e) => this.editTask(e);
+    if (taskEditForm) taskEditForm.onsubmit = (e) => this.updateTask(e);
 
     viewProjectButtons.forEach((button) => {
       button.onclick = (e) => this.viewProject(e);
