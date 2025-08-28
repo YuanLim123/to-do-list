@@ -6,6 +6,7 @@ import createHomeIndex from "./View/Pages/Home/index.js";
 import createProjectDetail from "./View/Components/ProjectDetail.js";
 import createProjectTable from "./View/Components/ProjectTable.js";
 import createShowProject from "./View/Pages/Project/show.js";
+import createTaskShow from "./View/Pages/Task/show.js";
 import Task from "./Class/Task.js";
 import Project from "./Class/Project.js";
 import Priority from "./Enum/Priority.js";
@@ -62,9 +63,7 @@ class ScreenController {
 
   updateProjectTable() {
     const projectTbl = document.getElementById("projectTable");
-    const projectTableDiv = document.querySelector(
-      ".project-table-container"
-    );
+    const projectTableDiv = document.querySelector(".project-table-container");
 
     if (!projectTbl || !projectTableDiv) return;
     projectTableDiv.removeChild(projectTbl);
@@ -114,7 +113,6 @@ class ScreenController {
     this.renderPage(createProjectIndex());
     this.updateProjectTable();
     this.attachListeners();
-
   }
 
   viewProject(e) {
@@ -122,12 +120,25 @@ class ScreenController {
     if (index === undefined || index < 0 || index >= this.projects.length)
       return;
     const project = this.projects[index];
+    this.currentProject = project;
     this.renderPage(createShowProject(project));
   }
 
   viewTask(e) {
     e.preventDefault();
-    alert("Task details feature coming soon!");
+    const idx = e.target.dataset.index;
+    const task = this.currentProject.getAllTasks()[idx];
+    this.renderPage(createTaskShow(task));
+  }
+
+  deleteTask(e) {
+    e.preventDefault();
+    if (!confirm("Are you sure to delete this task?")) return;
+    const index = e.target.dataset.index;
+    if (index === undefined || index < 0 || index >= this.currentProject.length)
+      return;
+    this.currentProject.deleteTask(index);
+    this.renderPage(createShowProject(this.currentProject));
   }
 
   attachListeners() {
@@ -137,27 +148,38 @@ class ScreenController {
     const projectAddForm = document.getElementById("projectAddForm");
     const taskAddForm = document.getElementById("taskAddForm");
     const saveButton = document.querySelector(".save-project-button");
-    const viewProjectButtons = document.querySelectorAll(".view-project-button");
-    const taskTittleLink = document.getElementById("task-title-link");
+    const viewProjectButtons = document.querySelectorAll(
+      ".view-project-button"
+    );
+    const taskTittleLinks = document.querySelectorAll("#task-title-link");
     const backButton = document.querySelector(".back-button");
+    const taskDeleteButtons = document.querySelectorAll("#task-delete-button");
 
     if (homeButton)
       homeButton.onclick = () => this.renderPage(createHomeIndex());
     if (projectsButton)
-      projectsButton.onclick = () => this.renderPage(createProjectIndex(this.projects));
+      projectsButton.onclick = () =>
+        this.renderPage(createProjectIndex(this.projects));
     if (projectsAddButton)
       projectsAddButton.onclick = () => this.renderPage(createProjectAdd());
     if (taskAddForm) taskAddForm.onsubmit = (e) => this.taskSubmit(e);
     if (projectAddForm) projectAddForm.onsubmit = (e) => this.projectSubmit(e);
     if (saveButton) saveButton.onclick = () => this.saveProject();
-    if (taskTittleLink) taskTittleLink.onclick = (e) => this.viewTask(e);
-    if (backButton) backButton.onclick = () => this.renderPage(createProjectIndex(this.projects));
+    if (backButton)
+      backButton.onclick = () =>
+        this.renderPage(createProjectIndex(this.projects));
 
     viewProjectButtons.forEach((button) => {
       button.onclick = (e) => this.viewProject(e);
     });
 
+    taskTittleLinks.forEach((link) => {
+      link.onclick = (e) => this.viewTask(e);
+    });
 
+    taskDeleteButtons.forEach((button) => {
+      button.onclick = (e) => this.deleteTask(e);
+    });
   }
 }
 

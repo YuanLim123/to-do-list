@@ -87,7 +87,8 @@ header {
 #content .project-add-container .project-add-form button,
 #content .task-add-form button,
 #content .save-project-button,
-#content .back-button {
+#content .back-button,
+#content .edit-task-button {
   padding: 10px;
   border: 1px solid darkgray;
   border-radius: 5px;
@@ -211,6 +212,19 @@ table td {
   grid-row: 3 / 4;
   margin-top: auto;
   margin-left: auto;
+}
+
+.task-show-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.task-show-container .task-show-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 

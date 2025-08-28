@@ -28,7 +28,7 @@ class Project {
         this._tasks = [];
     }
 
-    delete(index) {
+    deleteTask(index) {
         this._tasks.splice(index, 1);
     }
 

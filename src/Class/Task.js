@@ -18,6 +18,22 @@ class Task {
         return this._dueDate;
     }
 
+    get description() {
+        return this._description;
+    }
+
+    get notes() {
+        return this._notes;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    get priority() {
+        return this._priority;
+    }
+
     complete() {
         this._status = Status.COMPLETED;
     }
