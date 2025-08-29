@@ -158,6 +158,7 @@ class ScreenController {
     saveProjectsToLocal(this.projects);
     alert("Task deleted successfully.");
     this.renderPage(createShowProject(this.currentProject));
+    // implement local storage update
   }
 
   editTask(e) {
