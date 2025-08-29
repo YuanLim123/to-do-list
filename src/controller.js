@@ -11,12 +11,14 @@ import createTaskEdit from "./View/Pages/Task/edit.js";
 import Task from "./Class/Task.js";
 import Project from "./Class/Project.js";
 import Priority from "./Enum/Priority.js";
+import StorageService from "./Services/StorageService.js";
 
 class ScreenController {
   constructor() {
     this.contentDiv = document.getElementById("content");
     this.currentProject = null;
-    this.projects = [];
+    this.storageService = new StorageService();
+    this.projects = this.storageService.loadProjects() ?? [];
   }
 
   renderPage(page = createHomeIndex()) {
@@ -110,6 +112,7 @@ class ScreenController {
     }
 
     this.projects.push(this.currentProject);
+    this.storageService.saveProjects(this.projects);
     this.currentProject = null;
     this.renderPage(createProjectIndex());
     this.updateProjectTable();
@@ -125,12 +128,23 @@ class ScreenController {
     this.renderPage(createShowProject(project));
   }
 
+  deleteProject(e) {
+    if (!confirm("Are you sure to delete this project?")) return;
+    const index = e.target.dataset.index;
+    if (index === undefined || index < 0 || index >= this.projects.length) return;
+
+    this.projects.splice(index, 1);
+    alert("Project deleted successfully.");
+    this.updateProjectTable();
+  }
+
   viewTask(e) {
     e.preventDefault();
     const id = e.target.dataset.taskId;
     const task = this.currentProject.findTaskById(id);
     if (!task) return;
     this.renderPage(createTaskShow(task));
+
   }
 
   deleteTask(e) {
@@ -141,13 +155,15 @@ class ScreenController {
     if (!task) return;
 
     this.currentProject.deleteTaskById(id);
+    saveProjectsToLocal(this.projects);
+    alert("Task deleted successfully.");
     this.renderPage(createShowProject(this.currentProject));
   }
 
   editTask(e) {
     const id = e.target.dataset.taskId;
     const task = this.currentProject.findTaskById(id);
-    if (!task) return;    
+    if (!task) return;
     this.renderPage(createTaskEdit(task));
   }
 
@@ -164,6 +180,7 @@ class ScreenController {
       const priority = Priority.LOW;
 
       task.update({ title, description, dueDate, notes, priority });
+      saveProjectsToLocal(this.projects);
       alert("Task updated successfully.");
       this.renderPage(createTaskShow(task));
     } catch (error) {
@@ -183,6 +200,9 @@ class ScreenController {
     const saveButton = document.querySelector(".save-project-button");
     const viewProjectButtons = document.querySelectorAll(
       ".view-project-button"
+    );
+    const deleteProjectButtons = document.querySelectorAll(
+      ".delete-project-button"
     );
     const taskTittleLinks = document.querySelectorAll("#task-title-link");
     const backButton = document.querySelector(".back-button");
@@ -216,6 +236,10 @@ class ScreenController {
 
     taskDeleteButtons.forEach((button) => {
       button.onclick = (e) => this.deleteTask(e);
+    });
+
+    deleteProjectButtons.forEach((button) => {
+      button.onclick = (e) => this.deleteProject(e);
     });
   }
 }

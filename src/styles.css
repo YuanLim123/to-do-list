@@ -160,6 +160,12 @@ header {
   border-collapse: collapse;
 }
 
+#content .main .project-index-container table .button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 table, td, th {
   border: 1px solid black;
 }

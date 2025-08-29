@@ -1,8 +1,8 @@
 import Status  from "../Enum/Status.js";
 
 class Task {
-    constructor(title, description, dueDate, priority, notes, status = Status.INCOMPLETE) {
-        this._id = crypto.randomUUID();
+    constructor(title, description, dueDate, priority, notes, status = Status.INCOMPLETE, id = crypto.randomUUID()) {
+        this._id = id;
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;

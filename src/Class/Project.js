@@ -1,6 +1,6 @@
 class Project {
-    constructor(name, dueDate) {
-        this._id = crypto.randomUUID();
+    constructor(name, id = crypto.randomUUID()) {
+        this._id = id;
         this._tasks = [];
         this._name = name;
     }

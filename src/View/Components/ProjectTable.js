@@ -24,12 +24,26 @@ function createProjectTable(projects = [], fieldsTitle = ["Name", "Action"]) {
             cell.appendChild(cellText);
 
             const cell2 = document.createElement("td");
-            const cellButton = document.createElement("button");
-            cellButton.textContent = "View";
-            cellButton.classList.add("view-project-button");
-            cellButton.dataset.index = i;
-            cell2.appendChild(cellButton);
-            
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button-container");
+
+            const viewButton = document.createElement("button");
+            const deleteButton = document.createElement("button");
+
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("delete-project-button");
+            deleteButton.dataset.index = i;
+
+            viewButton.textContent = "View";
+            viewButton.classList.add("view-project-button");
+            viewButton.dataset.index = i;
+
+            buttonContainer.appendChild(viewButton);
+            buttonContainer.appendChild(deleteButton);
+
+            cell2.appendChild(buttonContainer);
+
             row.appendChild(cell);
             row.appendChild(cell2);
         }
