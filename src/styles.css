@@ -233,4 +233,44 @@ table td {
   justify-content: space-between;
 }
 
+.dropdown {
+  padding: 10px;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown .dropbtn .fa {
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 

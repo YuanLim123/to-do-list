@@ -1,4 +1,5 @@
 import createSideBarLink from "./SideBarLink";
+import createDropdown from "./Dropdown";
 
 function createSideBar() {
   const sideBarDiv = document.createElement("div");
@@ -13,6 +14,13 @@ function createSideBar() {
   sideBarLinks.forEach((link) => {
     sideBarDiv.appendChild(link);
   });
+
+    const links = [
+    { text: "Projects", id: "dropdown-link-projects" },
+    { text: "Add Project", id: "dropdown-link-add-project" },
+  ];
+
+  sideBarDiv.appendChild(createDropdown(links));
 
   return sideBarDiv;
 }

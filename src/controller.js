@@ -131,7 +131,8 @@ class ScreenController {
   deleteProject(e) {
     if (!confirm("Are you sure to delete this project?")) return;
     const index = e.target.dataset.index;
-    if (index === undefined || index < 0 || index >= this.projects.length) return;
+    if (index === undefined || index < 0 || index >= this.projects.length)
+      return;
 
     this.projects.splice(index, 1);
     alert("Project deleted successfully.");
@@ -144,7 +145,6 @@ class ScreenController {
     const task = this.currentProject.findTaskById(id);
     if (!task) return;
     this.renderPage(createTaskShow(task));
-
   }
 
   deleteTask(e) {
@@ -155,7 +155,7 @@ class ScreenController {
     if (!task) return;
 
     this.currentProject.deleteTaskById(id);
-    saveProjectsToLocal(this.projects);
+    this.storageService.saveProjects(this.projects);
     alert("Task deleted successfully.");
     this.renderPage(createShowProject(this.currentProject));
     // implement local storage update
@@ -181,7 +181,7 @@ class ScreenController {
       const priority = Priority.LOW;
 
       task.update({ title, description, dueDate, notes, priority });
-      saveProjectsToLocal(this.projects);
+      this.storageService.saveProjects(this.projects);
       alert("Task updated successfully.");
       this.renderPage(createTaskShow(task));
     } catch (error) {
@@ -211,11 +211,24 @@ class ScreenController {
     const taskEditButton = document.querySelector(".edit-task-button");
     const taskEditForm = document.getElementById("taskEditForm");
 
+    const dropDownLinkProjects = document.getElementById(
+      "dropdown-link-projects"
+    );
+    const dropDownLinkAddProject = document.getElementById(
+      "dropdown-link-add-project"
+    );
+
     if (homeButton)
       homeButton.onclick = () => this.renderPage(createHomeIndex());
     if (projectsButton)
       projectsButton.onclick = () =>
         this.renderPage(createProjectIndex(this.projects));
+    if (dropDownLinkProjects)
+      dropDownLinkProjects.onclick = () =>
+        this.renderPage(createProjectIndex(this.projects));
+    if (dropDownLinkAddProject)
+      dropDownLinkAddProject.onclick = () =>
+        this.renderPage(createProjectAdd());
     if (projectsAddButton)
       projectsAddButton.onclick = () => this.renderPage(createProjectAdd());
     if (taskAddForm) taskAddForm.onsubmit = (e) => this.taskSubmit(e);
