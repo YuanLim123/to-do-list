@@ -1,7 +1,7 @@
 import bgOne from "../../Assets/imgs/bg1.jpg";
 import bgTwo from "../../Assets/imgs/bg2.jpg";
 import bgThree from "../../Assets/imgs/bg3.jpg";
-
+// refer to bro code
 function createImageSlider() {
     const sliderDiv = document.createElement('div');
     sliderDiv.classList.add('slider');
