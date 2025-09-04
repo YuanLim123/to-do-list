@@ -1,4 +1,4 @@
-import createImageSlider from "../../Components/ImageSlider";
+import createImageSlider from "../../Components/ImageSlider/ImageSlider";
 
 function createHomeIndex() {
     const containerDiv = document.createElement("div");

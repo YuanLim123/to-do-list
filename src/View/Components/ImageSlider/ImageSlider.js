@@ -1,6 +1,6 @@
-import bgOne from "../../Assets/imgs/bg1.jpg";
-import bgTwo from "../../Assets/imgs/bg2.jpg";
-import bgThree from "../../Assets/imgs/bg3.jpg";
+import bgOne from "../../../Assets/imgs/bg1.jpg";
+import bgTwo from "../../../Assets/imgs/bg2.jpg";
+import bgThree from "../../../Assets/imgs/bg3.jpg";
 // refer to bro code
 function createImageSlider() {
     const sliderDiv = document.createElement('div');
@@ -19,12 +19,12 @@ function createImageSlider() {
     });
 
     const prevBtn = document.createElement('button');
-    prevBtn.classList.add('prev');
+    prevBtn.classList.add('slider-prev-btn');
     prevBtn.textContent = '<';
     sliderDiv.appendChild(prevBtn);
 
     const nextBtn = document.createElement('button');
-    nextBtn.classList.add('next');
+    nextBtn.classList.add('slider-next-btn');
     nextBtn.textContent = '>';
     sliderDiv.appendChild(nextBtn);
 

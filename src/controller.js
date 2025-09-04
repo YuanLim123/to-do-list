@@ -12,6 +12,7 @@ import Task from "./Class/Task.js";
 import Project from "./Class/Project.js";
 import Priority from "./Enum/Priority.js";
 import StorageService from "./Services/StorageService.js";
+import ImageSliderHandler from "./View/Components/ImageSlider/ImageSliderHandler.js";
 
 class ScreenController {
   constructor() {
@@ -28,6 +29,13 @@ class ScreenController {
     const main = createMainContainer();
     main.appendChild(page);
     this.contentDiv.appendChild(main);
+
+    // check if slider exists
+    // to avoid multiple instantiation
+    const sliderExists = document.querySelector(".slides");
+    if (sliderExists) {
+      new ImageSliderHandler();
+    }
     this.attachListeners();
   }
 

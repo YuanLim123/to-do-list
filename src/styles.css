@@ -199,7 +199,35 @@ table td {
 
 #content .home-index-container .slider img{
   width: 100%;
+  max-height: 600px;
   display: none;
+  border-radius: 10px;
+}
+
+#content .home-index-container .slider img.displaySlide{
+  display: block;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+#content .home-index-container .slider button,
+#content .home-index-container .slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#content .home-index-container .slider .slider-prev-btn {
+  left: 10px;
+}
+
+#content .home-index-container .slider .slider-next-btn {
+  right: 10px;
 }
 
 #content .project-show-container {
@@ -294,6 +322,11 @@ table td {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+@keyframes fade {
+  from {opacity: .5} 
+  to {opacity: 1}
 }
 
 
